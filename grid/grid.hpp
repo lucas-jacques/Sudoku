@@ -13,6 +13,7 @@ public:
     int get(int x, int y) const;
     void fill(int n);
     int size() const;
+    void draw();
 
 private:
     int _size;
@@ -23,5 +24,7 @@ private:
     void swapDigits(int digit1, int digit2);
     bool isPositionValid(int x, int y, int value);
 };
+
+std::ostream &operator<<(std::ostream &os, Grid &s);
 
 #endif
