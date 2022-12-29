@@ -8,12 +8,15 @@ class Grid
 {
 public:
     Grid(int size);
-    void print();
-    void set(int x, int y, int value);
-    int get(int x, int y) const;
-    void fill(int n);
     int size() const;
+    int get(int x, int y) const;
+    bool isPositionValid(int x, int y, int value);
+
+    void set(int x, int y, int value);
+
+    void fill(int n);
     void draw();
+    void print();
 
 private:
     int _size;
@@ -22,7 +25,6 @@ private:
     void swapLines(int line1, int line2);
     void swapColumns(int column1, int column2);
     void swapDigits(int digit1, int digit2);
-    bool isPositionValid(int x, int y, int value);
 };
 
 std::ostream &operator<<(std::ostream &os, Grid &s);

@@ -6,6 +6,11 @@
 
 Grid::Grid(int size)
 {
+    if (size < 1 || std::sqrt(size) != (int)sqrt(size))
+    {
+        std::cout << "Invalid size, size must be a perfect square" << std::endl;
+        exit(1);
+    }
     _size = size;
     _board = std::vector<int>(size * size, 0);
     generate();

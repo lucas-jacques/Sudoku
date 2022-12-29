@@ -10,3 +10,5 @@ public:
 private:
     Grid _grid;
 };
+
+bool backTrackingSolver(Grid &board, int x = 0, int y = 0);

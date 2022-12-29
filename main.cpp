@@ -5,6 +5,7 @@
 
 int main(void)
 {
-    Grid grid(9);
-    std::cout << grid;
-}
+
+    SudokuSolver sudoku(9, 4);
+    sudoku.solve();
+};
