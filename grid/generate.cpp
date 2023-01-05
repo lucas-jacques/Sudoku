@@ -104,7 +104,7 @@ void Grid::generate()
 
     // Randomly remove numbers
 
-    int numToRemove = 0.6 * (_size * _size);
+    int numToRemove = 0.4 * (_size * _size);
 
     while (numToRemove > 0)
     {

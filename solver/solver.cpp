@@ -31,7 +31,7 @@ bool backTrackingSolver(Grid &board, int x, int y)
     }
     else
     {
-        for (int i = 1; i <= 9; i++)
+        for (int i = 1; i <= board.size(); i++)
         {
             if (board.isPositionValid(x, y, i))
             {
