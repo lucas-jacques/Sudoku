@@ -3,6 +3,67 @@
 #include <fstream>
 #include <string>
 #include <math.h>
+#include "../utils/fshelpers.hpp"
+
+std::vector<std::string> split(std::string s, std::string delimiter) // split a string with a delimiter. Please see https://stackoverflow.com/questions/14265581/parse-split-a-string-in-c-using-string-delimiter-standard-c
+{
+    size_t pos_start = 0, pos_end, delim_len = delimiter.length();
+    std::string token;
+    std::vector<std::string> res;
+
+    while ((pos_end = s.find(delimiter, pos_start)) != std::string::npos)
+    {
+        token = s.substr(pos_start, pos_end - pos_start);
+        pos_start = pos_end + delim_len;
+        res.push_back(token);
+    }
+
+    res.push_back(s.substr(pos_start));
+    return res;
+}
+
+Grid::Grid(std::string fileName)
+{
+    std::vector<int> board;
+    std::string fileAsText = fshelpers::read(fileName);
+
+    auto lines = split(fileAsText, "\n");
+
+    int size = lines.size();
+    if (size < 1 || std::sqrt(size) != (int)sqrt(size))
+    {
+        std::cout << "Invalid size, size must be a perfect square" << std::endl;
+        exit(1);
+    }
+
+    for (std::string line : lines)
+    {
+
+        std::vector<std::string> numbers = split(line, " ");
+
+        if (numbers.size() != size)
+        {
+            std::cout << "Invalid size, size must be a perfect square" << std::endl;
+            exit(1);
+        }
+
+        for (std::string strNumber : numbers)
+        {
+
+            int parsedNumber = std::stoi(strNumber);
+            std::cout << parsedNumber;
+
+            board.push_back(parsedNumber);
+        }
+        std::cout << "\n";
+    }
+
+    _size = size;
+    _board = board;
+
+    std::cout
+        << "Grid successfully loaded from files \n";
+}
 
 Grid::Grid(int size)
 {

@@ -8,6 +8,8 @@ class Grid
 {
 public:
     Grid(int size);
+    Grid(std::string fileName);
+
     int size() const;
     int get(int x, int y) const;
     bool isPositionValid(int x, int y, int value);

@@ -6,6 +6,7 @@
 int main(void)
 {
 
-    SudokuSolver sudoku(9, 4);
+    Grid grid("inkala.txt");
+    SudokuSolver sudoku(grid);
     sudoku.solve();
 };

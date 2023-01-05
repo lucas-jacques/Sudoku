@@ -10,7 +10,7 @@ SudokuSolver::SudokuSolver(int size, int level) : _grid(size)
 
 SudokuSolver::SudokuSolver(Grid grid) : _grid(grid)
 {
-    std::cout << "Generated grid:\n";
+    std::cout << "Initial grid:\n";
     std::cout << _grid;
 }
 
