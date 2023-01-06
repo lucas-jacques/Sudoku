@@ -3,9 +3,9 @@
 #include "grid/grid.hpp"
 #include "solver/solver.hpp"
 
-int main(void)
+int main(int argc, char *argv[])
 {
 
-    SudokuSolver sudoku(25, 1);
+    SudokuSolver sudoku(9, 5);
     sudoku.solve();
 };

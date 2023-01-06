@@ -65,7 +65,7 @@ Grid::Grid(std::string fileName)
         << "Grid successfully loaded from files \n";
 }
 
-Grid::Grid(int size)
+Grid::Grid(int size, int level)
 {
     if (size < 1 || std::sqrt(size) != (int)sqrt(size))
     {
@@ -74,7 +74,7 @@ Grid::Grid(int size)
     }
     _size = size;
     _board = std::vector<int>(size * size, 0);
-    generate();
+    generate(level);
 }
 
 void Grid::set(int x, int y, int value)

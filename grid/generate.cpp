@@ -44,8 +44,14 @@ void Grid::swapDigits(int d1, int d2)
     }
 }
 
-void Grid::generate()
+void Grid::generate(int level)
 {
+
+    if (level < 1 || level > 5)
+    {
+        std::cout << "Invalid level value. Level must be between 1 and 5 \n";
+        exit(1);
+    }
     int value = 0;
 
     for (int i = 0; i < _size * _size; i++)
@@ -103,8 +109,8 @@ void Grid::generate()
     }
 
     // Randomly remove numbers
-
-    int numToRemove = 0.4 * (_size * _size);
+    std::array<double, 5> levels{{0.25, 0.4, 0.5, 0.6, 0.75}};
+    int numToRemove = levels[level - 1] * (_size * _size);
 
     while (numToRemove > 0)
     {
