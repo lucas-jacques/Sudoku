@@ -3,31 +3,14 @@
 #include <fstream>
 #include <string>
 #include <math.h>
-#include "../utils/fshelpers.hpp"
-
-std::vector<std::string> split(std::string s, std::string delimiter) // split a string with a delimiter. Please see https://stackoverflow.com/questions/14265581/parse-split-a-string-in-c-using-string-delimiter-standard-c
-{
-    size_t pos_start = 0, pos_end, delim_len = delimiter.length();
-    std::string token;
-    std::vector<std::string> res;
-
-    while ((pos_end = s.find(delimiter, pos_start)) != std::string::npos)
-    {
-        token = s.substr(pos_start, pos_end - pos_start);
-        pos_start = pos_end + delim_len;
-        res.push_back(token);
-    }
-
-    res.push_back(s.substr(pos_start));
-    return res;
-}
+#include "../utils/utils.hpp"
 
 Grid::Grid(std::string fileName)
 {
     std::vector<int> board;
-    std::string fileAsText = fshelpers::read(fileName);
+    std::string fileAsText = utils::read(fileName);
 
-    auto lines = split(fileAsText, "\n");
+    auto lines = utils::split(fileAsText, "\n");
 
     int size = lines.size();
     if (size < 1 || std::sqrt(size) != (int)sqrt(size))
@@ -39,7 +22,7 @@ Grid::Grid(std::string fileName)
     for (std::string line : lines)
     {
 
-        std::vector<std::string> numbers = split(line, " ");
+        std::vector<std::string> numbers = utils::split(line, " ");
 
         if (numbers.size() != size)
         {
@@ -77,6 +60,12 @@ Grid::Grid(int size, int level)
     generate(level);
 }
 
+/**
+ * Set a value in the grid.
+ * @param x The x position.
+ * @param y The y position.
+ * @param value The value to set.
+ */
 void Grid::set(int x, int y, int value)
 {
     _board[y * _size + x] = value;
@@ -87,23 +76,21 @@ int Grid::get(int x, int y) const
     return _board.at(y * _size + x);
 }
 
-void Grid::print()
-{
-    for (int i = 0; i < _size; i++)
-    {
-        for (int j = 0; j < _size; j++)
-        {
-            std::cout << " " << get(i, j) << " ";
-        }
-        std::cout << std::endl;
-    }
-}
-
 int Grid::size() const
 {
     return _size;
 }
 
+/**
+ * Check if the value is valid in the position
+ *
+ * @param x The x position.
+ * @param y The y position.
+ * @param value The value to check.
+ *
+ * @return true if the value is valid, false otherwise.
+ *
+ */
 bool Grid::isPositionValid(int x, int y, int value)
 {
     if (value == 0 || value > _size)

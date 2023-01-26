@@ -2,18 +2,40 @@
 #include "iostream"
 #include "../types.hpp"
 
+/**
+ * SudokuSolver constructor.
+ * It generate a grid with the given size and level.
+ *
+ * @param size The size of the grid.
+ * @param level The level of difficulty of the grid between 1 and 5.
+ *
+ */
 SudokuSolver::SudokuSolver(int size, int level) : _grid(size, level)
 {
     std::cout << "Generated grid:\n";
     std::cout << _grid;
 }
 
+/**
+ * SudokuSolver constructor.
+ * Load an existing grid.
+ *
+ * @param grid A pre-existing grid.
+ *
+ */
+
 SudokuSolver::SudokuSolver(Grid grid) : _grid(grid)
 {
     std::cout << "Initial grid:\n";
     std::cout << _grid;
 }
-Positions getEmptyPositions(Grid &board) // Get positions of empty cells
+
+/**
+ * This function take a grid and return a vector of all the empty positions.
+ *
+ * @param board The grid to scan.
+ */
+Positions getEmptyPositions(Grid &board)
 {
     Positions positions;
     for (int i = 0; i < board.size(); i++)
@@ -29,6 +51,13 @@ Positions getEmptyPositions(Grid &board) // Get positions of empty cells
     }
     return positions;
 }
+
+/**
+ * This function take a grid and a position and return a vector of all the possible values for this position.
+ *
+ * @param board The grid to scan.
+ * @param p The position to scan.
+ */
 std::vector<int> getCandidateValues(Grid &board, Position p)
 {
     std::vector<int> availableValues;
@@ -42,6 +71,15 @@ std::vector<int> getCandidateValues(Grid &board, Position p)
     return availableValues;
 }
 
+/**
+ * This function take a grid and fill all the empty positions with the only possible value.
+ * It return true if the grid has changed.
+ * It fill the changedPositions vector with the positions that have changed.
+ *
+ * @param board The grid to scan.
+ * @param changedPositions The vector to fill with the positions that have changed.
+ *
+ */
 bool candidateReduction(Grid &board, Positions &changedPositions)
 {
     bool changed = false;
@@ -62,6 +100,17 @@ bool candidateReduction(Grid &board, Positions &changedPositions)
     return changed;
 }
 
+/**
+ * This function solve  a grid using the backtracking algorithm.
+ * It return true if the grid is solved.
+ * It fill the grid with the solution.
+ * It return false if the grid is unsolvable.
+ *
+ * @param board The grid to solve.
+ * @param x The x position of the current position.
+ * @param y The y position of the current position.
+ *
+ */
 bool backTrackingSolver(Grid &board, int x, int y)
 {
     Positions changedPositions;
@@ -104,6 +153,10 @@ bool backTrackingSolver(Grid &board, int x, int y)
     }
 }
 
+/**
+ * Solve the grid using the backtracking algorithm.
+ *
+ */
 void SudokuSolver::solve()
 {
     backTrackingSolver(_grid);

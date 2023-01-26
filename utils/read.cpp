@@ -1,10 +1,17 @@
 #include <iostream>
 #include <fstream>
 #include <string>
-#include "fshelpers.hpp"
+#include "utils.hpp"
 #include <sstream>
 
-std::string fshelpers::read(std::string filename)
+/**
+ * This function is used to read a file and return its content as a string.
+ *
+ * @param filename The path of the file to read.
+ * @return The content of the file.
+ *
+ */
+std::string utils::read(std::string filename)
 {
     std::ifstream file;
     file.open(filename);

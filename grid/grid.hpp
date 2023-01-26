@@ -18,7 +18,6 @@ public:
 
     void fill(int n);
     void draw();
-    void print();
 
 private:
     int _size;

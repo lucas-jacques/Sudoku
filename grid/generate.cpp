@@ -6,6 +6,11 @@
 #include <vector>
 #include "../types.hpp"
 
+/**
+ * Swap two columns of the grid.
+ * @param x1 The index of the first column.
+ * @param x2 The index of the second column.
+ */
 void Grid::swapColumns(int x1, int x2)
 {
     for (int i = 0; i < _size; i++)
@@ -16,6 +21,11 @@ void Grid::swapColumns(int x1, int x2)
     }
 }
 
+/**
+ * Swap two lines of the grid.
+ * @param y1 The index of the first line.
+ * @param y2 The index of the second line.
+ */
 void Grid::swapLines(int y1, int y2)
 {
     for (int i = 0; i < _size; i++)
@@ -26,6 +36,13 @@ void Grid::swapLines(int y1, int y2)
     }
 }
 
+/**
+ * Swap two digits of the grid. It replaces all the occurences of d1 by d2 and all the occurences of d2 by d1.
+ *
+ * @param d1 The first digit.
+ * @param d2 The second digit.
+ *
+ */
 void Grid::swapDigits(int d1, int d2)
 {
     for (int i = 0; i < _size; i++)
@@ -44,6 +61,11 @@ void Grid::swapDigits(int d1, int d2)
     }
 }
 
+/**
+ * Generate a random Sudoku grid with a given level of difficulty.
+ *
+ * @param level The level of difficulty. Must be between 1 and 5.
+ */
 void Grid::generate(int level)
 {
 
@@ -74,6 +96,7 @@ void Grid::generate(int level)
 
     int subSize = (int)sqrt(_size);
 
+    // Randomly swap columns, lines and digits
     for (int i = 0; i < _size * _size; i++)
     {
         int action = rand() % 3;
