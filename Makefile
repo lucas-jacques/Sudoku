@@ -1,3 +1,8 @@
+TO_COMPILE = main.cpp grid/*.cpp solver/*.cpp utils/*.cpp
+
 run:
-	g++ -o main  main.cpp grid/*.cpp solver/*.cpp utils/*.cpp  && ./main
-	
+	g++ -o SudokuSolver-build  $(TO_COMPILE)    && ./SudokuSolver
+build:
+	g++ -o SudokuSolver-build  $(TO_COMPILE)
+debug:
+	g++ -g -o SudokuSolver-build-debug  $(TO_COMPILE)    && ./SudokuSolver-debug

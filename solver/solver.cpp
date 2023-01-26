@@ -1,7 +1,7 @@
 #include "solver.hpp"
 #include "iostream"
 #include "../types.hpp"
-
+#include <chrono>
 /**
  * SudokuSolver constructor.
  * It generate a grid with the given size and level.
@@ -111,8 +111,9 @@ bool candidateReduction(Grid &board, Positions &changedPositions)
  * @param y The y position of the current position.
  *
  */
-bool backTrackingSolver(Grid &board, int x, int y)
+bool backTrackingSolver(Grid &board, int x, int y, int &count)
 {
+    count++;
     Positions changedPositions;
 
     if (x == board.size())
@@ -121,11 +122,11 @@ bool backTrackingSolver(Grid &board, int x, int y)
     }
     else if (y == board.size())
     {
-        return backTrackingSolver(board, x + 1, 0);
+        return backTrackingSolver(board, x + 1, 0, count);
     }
     else if (board.get(x, y) != 0)
     {
-        return backTrackingSolver(board, x, y + 1);
+        return backTrackingSolver(board, x, y + 1, count);
     }
     else
     {
@@ -138,7 +139,7 @@ bool backTrackingSolver(Grid &board, int x, int y)
             {
 
                 board.set(x, y, i);
-                if (backTrackingSolver(board, x, y + 1))
+                if (backTrackingSolver(board, x, y + 1, count))
                 {
                     return true;
                 }
@@ -159,8 +160,13 @@ bool backTrackingSolver(Grid &board, int x, int y)
  */
 void SudokuSolver::solve()
 {
-    backTrackingSolver(_grid);
-
+    int count = 0;
+    auto time1 = std::chrono::high_resolution_clock::now();
+    backTrackingSolver(_grid, 0, 0, count);
+    auto time2 = std::chrono::high_resolution_clock::now();
+    auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(time2 - time1).count();
+    std::cout << "Solved in " << duration << " milliseconds.\n";
+    std::cout << "Solved in " << count << " iterations.\n";
     std::cout << "Solved grid: \n";
     std::cout << _grid;
 }
