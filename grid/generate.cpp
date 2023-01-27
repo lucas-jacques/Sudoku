@@ -96,9 +96,7 @@ void Grid::generate(int level)
 
     int subSize = (int)sqrt(_size);
 
-    // Randomly swap columns, lines and digits
-    /*
-    for (int i = 0; i < _size * _size; i++)
+      for (int i = 0; i < _size * _size; i++)
     {
         int action = rand() % 3;
 
@@ -147,5 +145,5 @@ void Grid::generate(int level)
         set(x, y, 0);
         numToRemove--;
         whitelist.erase(whitelist.begin() + index);
-    }*/
+    }
 }
