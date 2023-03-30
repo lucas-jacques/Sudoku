@@ -1,5 +1,7 @@
 # Sudoku solver
 
+A basic C++ school project.
+
 ## Get started
 
 **Requirement :** g++ >= 12.0.0
